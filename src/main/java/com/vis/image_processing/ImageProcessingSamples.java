@@ -24,11 +24,20 @@ public class ImageProcessingSamples {
 		
 		ImageProcessingSamples ips = new ImageProcessingSamples();
 		
-		//load sample
+		/*
+		 * Fusion
+		 */
 		ClassLoader classLoader = ips.getClass().getClassLoader();
-		File file = new File(classLoader.getResource("samples/flybrain.tif").getFile());
+		File lut_file = new File(classLoader.getResource("samples/Jet.lut").getFile());
+		File ct_file = new File(classLoader.getResource("samples/CT_LEE_IR6a.dcm").getFile());
+		ips.fusion(new ImagePlus(ct_file.getAbsolutePath()), new ImagePlus(ct_file.getAbsolutePath()), lut_file.getAbsolutePath());
 		
-		new ImageProcessingSamples().view3d(file.getAbsolutePath());
+		/*
+		 * Viewer3D
+		 */
+//		ClassLoader classLoader = ips.getClass().getClassLoader();
+//		File file = new File(classLoader.getResource("samples/flybrain.tif").getFile());
+//		new ImageProcessingSamples().view3d(file.getAbsolutePath());
 	}
 	
 	//pixel handling
@@ -249,6 +258,11 @@ public class ImageProcessingSamples {
 		ImageRoi imageRoi = new ImageRoi(0, 0, bp);
 		imageRoi.setOpacity(0.25);
 		imp.setRoi(imageRoi);
+		if(imp.isVisible()) {
+			imp.updateAndRepaintWindow();
+		}else {
+			imp.show();
+		}
 	}
 	
 	/*
