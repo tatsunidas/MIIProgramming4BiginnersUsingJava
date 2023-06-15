@@ -1,8 +1,6 @@
 package com.vis.dicom_processing;
 
 import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 import ij.ImagePlus;
 import ij.util.DicomTools;
